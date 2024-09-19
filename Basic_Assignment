@@ -1,0 +1,219 @@
+create database employees;
+use employees;
+
+create table Employees_details(
+Employee_id int primary key,
+Firstname varchar(35),
+Lastname varchar(20),
+Department varchar(30),
+Salary decimal(10,2),
+HireDate date );
+
+insert into Employees_details (Employee_id,Firstname,Lastname,Department,Salary,HireDate) values
+(1, 'John', 'Doe', 'HR', 50000.00, '2020-01-15'),
+(2, 'Jane', 'Smith', 'Finance', 60000.00, '2019-03-23'),
+(3, 'Alice', 'Johnson', 'IT', 75000.00, '2021-07-10'),
+(4, 'Bob', 'Brown', 'Marketing', 55000.00, '2018-09-30'),
+(5, 'Charlie', 'Davis', 'IT', 70000.00, '2022-02-20');
+
+select * from Employees_details;
+
+select firstname from Employees_details;
+
+select Firstname,salary from Employees_details;
+
+select Employee_id, CONCAT(firstname,' ',lastname) from Employees_details;
+
+select Employee_id, CONCAT(firstname,' ',lastname) [fullname] from Employees_details;
+
+select Employee_id, CONCAT(firstname,' ',lastname) as [Fullname] from Employees_details;
+
+
+
+create table Employeerecords(
+Employee_id int primary key,
+Firstname varchar(35),
+Lastname varchar(20),
+Department varchar(30),
+Salary decimal(10,2));
+
+insert into Employeerecords (Employee_id,Firstname,Lastname,Department,Salary) values
+(1, 'John', 'Miller', 'HR', 60000),
+(2, 'Jane', 'Smith', 'Finance', 75000),
+(3, 'John', 'Miller', 'HR', 60000),
+(4, 'Emily', 'Davis', 'IT', 85000),
+(5, 'Michael', 'Brown', 'Finance', 75000),
+(6, 'Jane', 'Smith', 'Finance', 75000);
+
+select distinct Firstname from Employeerecords;
+
+select distinct firstname,salary from Employeerecords;
+
+select distinct firstname, lastname from Employeerecords;
+
+select distinct salary from Employeerecords;
+
+select distinct * from Employeerecords;
+
+select * into #temp1
+from [dbo].[Employeerecords]
+
+select * from #temp1;
+
+select * from dbo.Employeerecords;
+
+select * into #temp2
+from [dbo].[Employees_details]
+
+select * from #temp2;
+
+select * from dbo.Employees_details;
+
+select * from Employeerecords  
+where Firstname = 'john';
+
+select firstname,department from Employeerecords 
+where Salary>= 7000;
+
+select firstname,lastname,salary from Employeerecords
+where salary < 75000;
+
+select distinct firstname,lastname,salary,department from
+Employeerecords where salary <75000;
+
+select * from Employeerecords order by Salary asc;
+select * from Employeerecords order by Firstname asc , Salary desc;
+
+select * from Employeerecords where
+lastname = 'smith' and Employee_id = '2'
+
+select * from Employeerecords where
+Department = 'hr' or department = 'finance';
+
+select * from Employeerecords
+where Department = 'hr' or Department= 'finance';
+
+select * from Employeerecords where
+(firstname = 'john' or lastname = 'smith') or
+(firstname= 'emily' or Lastname ='brown');
+
+select * from Employeerecords where
+(firstname = 'john' or lastname = 'smith') and salary = '60000';
+
+select * from Employeerecords where
+not Firstname = 'john' and not lastname = 'smith'
+
+select * from Employeerecords where
+not Firstname = 'emily' and not Salary = '75000';
+
+select * from Employeerecords where
+salary between 60000 and 85000 ;
+
+select * from dbo.EmployeeRecords
+where salary>= 75000 and Salary<=85000
+
+select * from dbo.EmployeeRecords
+where salary not between 75000 and 85000
+
+select * from dbo.EmployeeRecords
+where not salary between 75000 and 85000
+
+select * from dbo.EmployeeRecords
+where Department in ('HR','IT')
+
+SELECT * FROM DBO.EMPLOYEERECORDS
+WHERE DEPARTMENT NOT IN ('HR','IT')
+
+select * from Employeerecords where
+salary in ('60000' , '85000')
+
+select * from Employeerecords where
+salary not in ('60000','75000')
+
+select * from Employeerecords where
+salary not in ('75000') and not Department = 'it'
+
+select * from Employees_details; 
+
+insert into Employees_details(Employee_id,Firstname,Lastname,Department,Salary,HireDate)
+values(6,'raj','Ambani','IT',6700,'2023-02-25');
+
+insert into Employees_details(Employee_id,Firstname,Lastname)
+values(7,'Prashant','Dubey');
+
+insert into Employees_details values
+(8,'Mahesh','Sriwastav','Finance',73000,'2024-01-02');
+
+select * from INFORMATION_SCHEMA.COLUMNS
+where TABLE_NAME = 'Employees_details';
+
+insert into Employees_details values
+(9,'Nawneet','','IT',65000,'2021-04-04')
+
+insert into Employees_details
+values(10,'Prenena','Verma','Finance',73000,'2021-02-02')
+
+insert into Employees_details values
+(11,'Shubham','Prajapatti',0,85000,'2020-05-03')
+
+select * from Employees_details
+
+select * from Employees_details
+where Department = null
+
+select * from Employees_details
+where Department is null
+
+select * from Employees_details
+where Department is not null
+
+select * into #1 from Employees_details
+
+select * from #1
+
+update #1
+set Department = 'Finance'
+where department is null
+
+update Employees_details
+set salary = 87000 , HireDate = '2020-05-03'
+where Employee_id = 7
+
+update #1
+set salary = 87000,hiredate='2020-05-03'
+where employee_id = 7
+
+select * from #1
+
+select * into #2 from Employees_details
+
+select * from #2
+
+update #2
+set department = 'Finance'
+
+select * into #3 from Employees_details
+
+select * from #3
+
+delete from #3
+where lastname='' or department = '0'
+
+select * into #4 from Employees_details
+
+select * from #4
+delete from #4
+
+select * from #3
+truncate table #3
+
+drop table #3
+
+--Delete - delete certain records from the table
+
+--if we will use delete without where condition, all records from the table will be deleted, but the 
+--table structure remains intact
+
+--Truncate - delete all the records from the table but the structure of the table remains intact
+
+--Drop - all the records will be deleted plus table structure will also be removed
